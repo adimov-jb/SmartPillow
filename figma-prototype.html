@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartPillow App — Protótipo Interativo & Design System Figma</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --white: #FFFFFF;
+      --white-soft: #FBFBF9;
+      --straw: #E8D9B5;
+      --straw-light: #F7F3EA;
+      --straw-dark: #C9B283;
+      --navy: #0A1A3A;
+      --navy-dark: #040C1D;
+      --navy-surface: #0F2349;
+      --tech-cyan: #38BDF8;
+      --tech-emerald: #10B981;
+      --tech-alert: #EF4444;
+      --font-display: 'Outfit', sans-serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: #1E1E1E; /* Figma Workspace Canvas Dark */
+      color: #E0E0E0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* ===================================================================
+       FIGMA TOP WORKSPACE BAR
+       =================================================================== */
+    .figma-topbar {
+      height: 52px;
+      background: #2C2C2C;
+      border-bottom: 1px solid #383838;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      font-size: 0.85rem;
+    }
+
+    .figma-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #FFFFFF;
+      font-weight: 700;
+    }
+
+    .figma-icon {
+      width: 24px;
+      height: 24px;
+      background: linear-gradient(135deg, #F24E1E 0%, #A259FF 50%, #1ABCFE 100%);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 900;
+      font-size: 11px;
+    }
+
+    .figma-title-tag {
+      background: rgba(232, 217, 181, 0.15);
+      border: 1px solid var(--straw);
+      color: var(--straw);
+      padding: 2px 10px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 700;
+    }
+
+    .figma-nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-figma {
+      padding: 7px 14px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: none;
+    }
+
+    .btn-figma-primary {
+      background: var(--straw);
+      color: var(--navy-dark);
+      font-weight: 700;
+    }
+    .btn-figma-primary:hover {
+      background: #FFFFFF;
+    }
+
+    .btn-figma-ghost {
+      background: #383838;
+      color: #FFFFFF;
+    }
+    .btn-figma-ghost:hover {
+      background: #484848;
+    }
+
+    /* ===================================================================
+       WORKSPACE LAYOUT: CANVAS & DEV INSPECTOR
+       =================================================================== */
+    .figma-workspace {
+      display: flex;
+      flex: 1;
+      height: calc(100vh - 52px);
+      overflow: hidden;
+    }
+
+    .figma-canvas-area {
+      flex: 1;
+      overflow: auto;
+      padding: 40px;
+      background: radial-gradient(circle, #2A2A2A 1px, transparent 1px);
+      background-size: 24px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 50px;
+    }
+
+    /* ===================================================================
+       BANNER COM A IMAGEM OFICIAL DO SHOWCASE FIGMA
+       =================================================================== */
+    .showcase-banner-card {
+      width: 100%;
+      max-width: 1120px;
+      background: #242424;
+      border: 1px solid #383838;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+    }
+
+    .showcase-banner-header {
+      padding: 16px 24px;
+      background: #2D2D2D;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #383838;
+    }
+
+    .showcase-banner-header h3 {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .showcase-banner-img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* ===================================================================
+       INTERACTIVE MOBILE DEVICE PROTOTYPE
+       =================================================================== */
+    .prototype-section-title {
+      text-align: center;
+      margin-bottom: -20px;
+    }
+    .prototype-section-title h2 {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      color: #FFFFFF;
+    }
+    .prototype-section-title p {
+      color: #AAAAAA;
+      font-size: 0.9rem;
+      margin-top: 6px;
+    }
+
+    .device-stage-container {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 40px;
+      width: 100%;
+      max-width: 1120px;
+      flex-wrap: wrap;
+    }
+
+    /* iPhone Frame */
+    .mobile-frame {
+      width: 380px;
+      height: 780px;
+      background: var(--white);
+      border-radius: 50px;
+      box-shadow: 0 30px 90px rgba(0, 0, 0, 0.8), 0 0 0 12px #2A2A2A, 0 0 0 14px #444444;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+    }
+
+    /* iPhone Dynamic Island / Notch */
+    .iphone-notch {
+      width: 120px;
+      height: 28px;
+      background: #000000;
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 20px;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 12px;
+    }
+
+    .iphone-camera {
+      width: 10px;
+      height: 10px;
+      background: #0F2349;
+      border-radius: 50%;
+      border: 1px solid #222;
+    }
+
+    /* Status Bar */
+    .app-status-bar {
+      height: 48px;
+      padding: 12px 24px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--navy);
+      z-index: 40;
+    }
+
+    /* Screen Views Inside Frame */
+    .app-viewport {
+      flex: 1;
+      overflow-y: auto;
+      overflow-x: hidden;
+      position: relative;
+      background: var(--white-soft);
+    }
+
+    .app-screen {
+      display: none;
+      padding: 16px 20px 90px;
+      min-height: 100%;
+      animation: screenFade 0.3s ease;
+    }
+
+    .app-screen.active {
+      display: block;
+    }
+
+    @keyframes screenFade {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Screen Header */
+    .app-nav-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .app-nav-title {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--navy);
+    }
+
+    .app-icon-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--straw-light);
+      border: 1px solid var(--straw);
+      color: var(--navy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    /* ===================================================================
+       TELA 1: SLEEP DASHBOARD
+       =================================================================== */
+    .dashboard-hero-card {
+      background: var(--navy);
+      border-radius: 28px;
+      padding: 24px 20px;
+      color: var(--white);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(10, 26, 58, 0.25);
+      border: 1.5px solid var(--straw);
+      margin-bottom: 20px;
+    }
+
+    .score-circle-gauge {
+      width: 150px;
+      height: 150px;
+      margin: 0 auto 16px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .score-circle-svg {
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+
+    .score-circle-bg {
+      fill: none;
+      stroke: rgba(255, 255, 255, 0.1);
+      stroke-width: 10;
+    }
+
+    .score-circle-progress {
+      fill: none;
+      stroke: url(#cyanGrad);
+      stroke-width: 10;
+      stroke-linecap: round;
+      stroke-dasharray: 408;
+      stroke-dashoffset: 40; /* 94% */
+      transition: stroke-dashoffset 1s ease;
+    }
+
+    .score-number-box {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .score-num {
+      font-family: var(--font-display);
+      font-size: 2.8rem;
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1;
+    }
+
+    .score-lbl {
+      font-size: 0.72rem;
+      color: var(--tech-cyan);
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    /* Biometric ECG Wave Card */
+    .biometric-card {
+      background: var(--navy-surface);
+      border-radius: 20px;
+      padding: 16px;
+      color: var(--white);
+      border: 1px solid rgba(232, 217, 181, 0.3);
+      margin-bottom: 18px;
+    }
+
+    .bio-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .bio-header h5 {
+      font-size: 0.86rem;
+      color: var(--straw);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .bio-stat-val {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--white);
+    }
+
+    /* Sleep Stages Breakdown */
+    .stages-card {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 16px;
+      border: 1px solid rgba(232, 217, 181, 0.8);
+      box-shadow: 0 4px 15px rgba(10, 26, 58, 0.04);
+    }
+
+    .stages-bars {
+      display: flex;
+      gap: 6px;
+      height: 28px;
+      margin: 12px 0 8px;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .stage-bar-item {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 0.4s ease;
+    }
+    .bar-deep { background: var(--navy); width: 45%; }
+    .bar-rem { background: var(--tech-cyan); width: 30%; }
+    .bar-light { background: var(--straw); width: 25%; }
+
+    /* ===================================================================
+       TELA 2: ANTI-RONCO CONTROL
+       =================================================================== */
+    .control-card {
+      background: var(--white);
+      border-radius: 24px;
+      padding: 20px;
+      border: 1.5px solid rgba(232, 217, 181, 0.8);
+      box-shadow: 0 6px 20px rgba(10, 26, 58, 0.04);
+      margin-bottom: 16px;
+    }
+
+    .control-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+
+    .control-title-row h5 {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      color: var(--navy);
+      font-weight: 700;
+    }
+
+    .custom-range-slider {
+      width: 100%;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--straw-light);
+      outline: none;
+      accent-color: var(--navy);
+      cursor: pointer;
+    }
+
+    .slider-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.72rem;
+      color: rgba(10, 26, 58, 0.6);
+      margin-top: 8px;
+      font-weight: 600;
+    }
+
+    /* Sound Frequency Box in App */
+    .snore-frequency-box {
+      background: #061127;
+      border-radius: 16px;
+      padding: 16px;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: var(--white);
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    /* Decibel Meter */
+    .meter-circle-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      padding: 12px 0;
+    }
+
+    .db-badge-large {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--tech-emerald);
+    }
+
+    /* ===================================================================
+       TELA 3: SOUNDBEAM AUDIO
+       =================================================================== */
+    .soundbeam-player-card {
+      background: var(--navy);
+      border-radius: 28px;
+      padding: 24px 20px;
+      color: var(--white);
+      text-align: center;
+      border: 1.5px solid var(--straw);
+      margin-bottom: 20px;
+    }
+
+    .audio-waves-container {
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      margin: 16px 0;
+    }
+
+    .audio-wave-bar {
+      width: 4px;
+      background: linear-gradient(to top, var(--straw), var(--tech-cyan));
+      border-radius: 4px;
+      animation: waveBounce 1.2s infinite ease-in-out;
+    }
+
+    @keyframes waveBounce {
+      0%, 100% { height: 10px; }
+      50% { height: 60px; }
+    }
+
+    .audio-wave-bar:nth-child(2) { animation-delay: 0.1s; }
+    .audio-wave-bar:nth-child(3) { animation-delay: 0.3s; }
+    .audio-wave-bar:nth-child(4) { animation-delay: 0.2s; }
+    .audio-wave-bar:nth-child(5) { animation-delay: 0.4s; }
+    .audio-wave-bar:nth-child(6) { animation-delay: 0.15s; }
+    .audio-wave-bar:nth-child(7) { animation-delay: 0.35s; }
+
+    .track-playlist {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .track-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      background: var(--white);
+      border-radius: 16px;
+      border: 1px solid rgba(232, 217, 181, 0.7);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .track-item.active {
+      background: var(--straw-light);
+      border-color: var(--navy);
+    }
+
+    .track-item h6 {
+      font-size: 0.88rem;
+      color: var(--navy);
+      font-weight: 700;
+    }
+
+    .track-item span {
+      font-size: 0.74rem;
+      color: rgba(10, 26, 58, 0.6);
+    }
+
+    /* ===================================================================
+       TELA 4: MASSAGEM CERVICAL
+       =================================================================== */
+    .massage-modes-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .app-mode-card {
+      background: var(--white);
+      border: 1.5px solid rgba(232, 217, 181, 0.8);
+      border-radius: 20px;
+      padding: 16px 14px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .app-mode-card.active {
+      background: var(--navy);
+      color: var(--white);
+      border-color: var(--navy);
+      box-shadow: 0 8px 20px rgba(10, 26, 58, 0.2);
+    }
+
+    .app-mode-card.active h6 {
+      color: var(--straw);
+    }
+
+    .mode-icon-circle {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--straw-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      margin: 0 auto 10px;
+    }
+
+    .app-mode-card.active .mode-icon-circle {
+      background: rgba(232, 217, 181, 0.2);
+    }
+
+    /* Bottom App Navigation Bar */
+    .app-bottom-nav {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 72px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      border-top: 1px solid rgba(232, 217, 181, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      padding: 0 10px;
+      z-index: 50;
+    }
+
+    .nav-tab-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: rgba(10, 26, 58, 0.5);
+      font-size: 0.68rem;
+      font-weight: 700;
+      transition: color 0.2s;
+      padding: 6px 12px;
+      border-radius: 12px;
+    }
+
+    .nav-tab-btn.active {
+      color: var(--navy);
+      background: var(--straw-light);
+    }
+
+    .nav-tab-icon {
+      font-size: 1.25rem;
+    }
+
+    /* ===================================================================
+       FIGMA DEV INSPECT PANEL (RIGHT SIDE DRAWER)
+       =================================================================== */
+    .figma-inspect-panel {
+      width: 380px;
+      background: #242424;
+      border-left: 1px solid #383838;
+      overflow-y: auto;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .inspect-header h4 {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      color: #FFFFFF;
+      margin-bottom: 4px;
+    }
+
+    .inspect-header p {
+      font-size: 0.78rem;
+      color: #999999;
+    }
+
+    .inspect-section {
+      background: #1E1E1E;
+      border: 1px solid #333333;
+      border-radius: 12px;
+      padding: 16px;
+    }
+
+    .inspect-section h5 {
+      font-size: 0.8rem;
+      color: var(--straw);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+
+    .token-chip-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+
+    .token-chip {
+      background: #2A2A2A;
+      border-radius: 8px;
+      padding: 8px 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.75rem;
+      color: #E0E0E0;
+    }
+
+    .token-color-circle {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .code-snippet-box {
+      background: #141414;
+      border-radius: 8px;
+      padding: 12px;
+      font-family: monospace;
+      font-size: 0.75rem;
+      color: #38BDF8;
+      overflow-x: auto;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Figma Workspace Bar -->
+  <header class="figma-topbar">
+    <div class="figma-brand">
+      <div class="figma-icon">F</div>
+      <span>SmartPillow App</span>
+      <span style="color: #888;">/</span>
+      <span style="color: #AAA;">Design System & Protótipo Interativo</span>
+      <span class="figma-title-tag">UI Kit Mobile v1.0</span>
+    </div>
+
+    <div class="figma-nav-actions">
+      <a href="index.html" class="btn-figma btn-figma-ghost">
+        ← Voltar ao Site
+      </a>
+      <a href="figma-design-tokens.json" download="figma-design-tokens.json" class="btn-figma btn-figma-primary">
+        📥 Baixar Tokens JSON
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Workspace Canvas -->
+  <div class="figma-workspace">
+    
+    <!-- Central Canvas Area -->
+    <main class="figma-canvas-area">
+
+      <!-- Banner com a imagem de arte do Figma -->
+      <section class="showcase-banner-card">
+        <div class="showcase-banner-header">
+          <h3>
+            <span style="color: var(--straw);">✦</span>
+            Showcase de Telas — SmartPillow Design System
+          </h3>
+          <span style="font-size: 0.75rem; color: #888;">Figma Canvas 4K • 393 x 852 px</span>
+        </div>
+        <img src="assets/images/figma-app-showcase.jpg" alt="Figma Design System Showcase - Telas do SmartPillow App" class="showcase-banner-img">
+      </section>
+
+      <!-- Título do Simulador -->
+      <div class="prototype-section-title">
+        <h2>Simulador Interativo do Aplicativo</h2>
+        <p>Clique nos botões da barra inferior do celular para navegar entre as 4 telas funcionais:</p>
+      </div>
+
+      <!-- Simulador Interativo do Dispositivo (iPhone) -->
+      <div class="device-stage-container">
+        
+        <div class="mobile-frame">
+          <!-- Dynamic Island Notch -->
+          <div class="iphone-notch">
+            <div class="iphone-camera"></div>
+          </div>
+
+          <!-- Status Bar -->
+          <div class="app-status-bar">
+            <span>09:41</span>
+            <div style="display: flex; gap: 6px; font-size: 0.72rem;">
+              <span>5G</span>
+              <span>100%</span>
+            </div>
+          </div>
+
+          <!-- Viewport com Telas Trocáveis -->
+          <div class="app-viewport">
+            
+            <!-- TELA 1: DASHBOARD DE SONO -->
+            <div class="app-screen active" id="screenDashboard">
+              <div class="app-nav-header">
+                <div class="app-nav-title">SmartPillow Dashboard</div>
+                <button type="button" class="app-icon-btn">🔔</button>
+              </div>
+
+              <!-- Card Circular Score -->
+              <div class="dashboard-hero-card">
+                <div class="score-circle-gauge">
+                  <svg class="score-circle-svg" viewBox="0 0 160 160">
+                    <defs>
+                      <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#38BDF8" />
+                        <stop offset="100%" stop-color="#E8D9B5" />
+                      </linearGradient>
+                    </defs>
+                    <circle class="score-circle-bg" cx="80" cy="80" r="65" />
+                    <circle class="score-circle-progress" cx="80" cy="80" r="65" />
+                  </svg>
+                  <div class="score-number-box">
+                    <span class="score-num">94</span>
+                    <span class="score-lbl">Sono Superior</span>
+                  </div>
+                </div>
+                <div style="font-size: 0.8rem; color: rgba(255,255,255,0.85);">
+                  Recuperação biológica <strong>+18% acima</strong> da sua média semanal.
+                </div>
+              </div>
+
+              <!-- Card ECG Biometria -->
+              <div class="biometric-card">
+                <div class="bio-header">
+                  <h5>❤️ Frequência Cardíaca Noturna</h5>
+                  <span class="bio-stat-val">58 bpm</span>
+                </div>
+                <!-- Gráfico simples em SVG -->
+                <svg width="100%" height="45" viewBox="0 0 300 45" fill="none">
+                  <path d="M0,25 Q30,22 60,25 T90,25 L105,5 L115,40 L125,18 L135,25 T180,25 T240,25 T300,25" stroke="#38BDF8" stroke-width="2.5" fill="none"/>
+                </svg>
+              </div>
+
+              <!-- Fases do Sono -->
+              <div class="stages-card">
+                <div style="display: flex; justify-content: space-between; font-size: 0.82rem; font-weight: 700; color: var(--navy);">
+                  <span>Fases do Sono</span>
+                  <span style="color: var(--tech-emerald);">7h 48m Total</span>
+                </div>
+                <div class="stages-bars">
+                  <div class="stage-bar-item bar-deep" title="Sono Profundo (45%)"></div>
+                  <div class="stage-bar-item bar-rem" title="Sono REM (30%)"></div>
+                  <div class="stage-bar-item bar-light" title="Sono Leve (25%)"></div>
+                </div>
+                <div style="display: flex; justify-content: space-between; font-size: 0.68rem; color: #888;">
+                  <span>● Profundo (3h 30m)</span>
+                  <span style="color: var(--tech-cyan);">● REM (2h 20m)</span>
+                  <span style="color: var(--straw-dark);">● Leve (1h 58m)</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- TELA 2: ANTI-RONCO ATIVO -->
+            <div class="app-screen" id="screenSnore">
+              <div class="app-nav-header">
+                <div class="app-nav-title">Controle Anti-Ronco</div>
+                <button type="button" class="app-icon-btn">⚙️</button>
+              </div>
+
+              <!-- Pressão Micropneumática -->
+              <div class="control-card">
+                <div class="control-title-row">
+                  <h5>Ajuste Micropneumático</h5>
+                  <span style="font-weight: 800; color: var(--navy);" id="airbagValText">+8 mm</span>
+                </div>
+                <input type="range" class="custom-range-slider" min="0" max="12" value="8" id="airbagSlider">
+                <div class="slider-labels">
+                  <span>0 mm (Plano)</span>
+                  <span>+6 mm (Médio)</span>
+                  <span>+12 mm (Máximo)</span>
+                </div>
+              </div>
+
+              <!-- Frequência Sonora -->
+              <div class="snore-frequency-box">
+                <div style="font-size: 0.75rem; color: var(--straw); margin-bottom: 6px;">Monitor Acústico Laringeo</div>
+                <div style="font-family: var(--font-display); font-size: 1.1rem; font-weight: 800; color: var(--tech-emerald);" id="appSnoreStatus">
+                  ● NENHUM RONCO DETECTADO
+                </div>
+                <div class="meter-circle-wrap">
+                  <div>
+                    <div class="db-badge-large" id="appDbNumber">14</div>
+                    <div style="font-size: 0.7rem; color: #888;">Decibéis no Quarto</div>
+                  </div>
+                </div>
+                <button type="button" id="btnAppSimulateSnore" style="background: var(--straw); color: var(--navy-dark); border: none; padding: 10px 18px; border-radius: 999px; font-weight: 700; font-size: 0.8rem; cursor: pointer; margin-top: 8px;">
+                  Testar Resposta Automática
+                </button>
+              </div>
+
+              <!-- Ajuste de Sensibilidade -->
+              <div class="control-card">
+                <div class="control-title-row">
+                  <h5>Ajuste Automático Inteligente</h5>
+                  <input type="checkbox" checked style="width: 20px; height: 20px; accent-color: var(--navy);">
+                </div>
+                <p style="font-size: 0.78rem; color: rgba(10, 26, 58, 0.7);">
+                  O travesseiro infla delicadamente apenas ao detectar a frequência do ronco, retornando ao estado relaxado após a desobstrução das vias aéreas.
+                </p>
+              </div>
+            </div>
+
+            <!-- TELA 3: SOUNDBEAM AUDIO -->
+            <div class="app-screen" id="screenAudio">
+              <div class="app-nav-header">
+                <div class="app-nav-title">SoundBeam Privado</div>
+                <button type="button" class="app-icon-btn">🎧</button>
+              </div>
+
+              <div class="soundbeam-player-card">
+                <h6 style="color: var(--straw); font-size: 0.82rem; text-transform: uppercase;">Condução Óssea Binaural</h6>
+                <h4 style="font-size: 1.2rem; margin: 4px 0 12px;" id="currentTrackTitle">Chuva na Floresta Tropical</h4>
+                
+                <!-- Ondas Dinâmicas -->
+                <div class="audio-waves-container">
+                  <div class="audio-wave-bar"></div>
+                  <div class="audio-wave-bar"></div>
+                  <div class="audio-wave-bar"></div>
+                  <div class="audio-wave-bar"></div>
+                  <div class="audio-wave-bar"></div>
+                  <div class="audio-wave-bar"></div>
+                  <div class="audio-wave-bar"></div>
+                </div>
+
+                <button type="button" id="appAudioPlayBtn" style="width: 48px; height: 48px; border-radius: 50%; background: var(--straw); color: var(--navy-dark); font-size: 1.2rem; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+                  ▶
+                </button>
+                <div style="font-size: 0.72rem; color: rgba(255,255,255,0.7); margin-top: 10px;">
+                  Desligamento inteligente ao entrar em sono profundo
+                </div>
+              </div>
+
+              <!-- Lista de Paisagens Sonoras -->
+              <div class="track-playlist">
+                <div class="track-item active" data-title="Chuva na Floresta Tropical">
+                  <div>
+                    <h6>Chuva na Floresta Tropical</h6>
+                    <span>Frequência Theta (432 Hz)</span>
+                  </div>
+                  <span>▶</span>
+                </div>
+                <div class="track-item" data-title="Zen Garden & Água Serena">
+                  <div>
+                    <h6>Zen Garden & Água Serena</h6>
+                    <span>Ruído Marrom Calmante</span>
+                  </div>
+                  <span>▶</span>
+                </div>
+                <div class="track-item" data-title="Ondas Delta Deep Sleep">
+                  <div>
+                    <h6>Ondas Delta Deep Sleep</h6>
+                    <span>Indução de Sono Profundo</span>
+                  </div>
+                  <span>▶</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- TELA 4: MASSAGEM CERVICAL -->
+            <div class="app-screen" id="screenMassage">
+              <div class="app-nav-header">
+                <div class="app-nav-title">Massagem Cervical</div>
+                <button type="button" class="app-icon-btn">💆</button>
+              </div>
+
+              <div class="massage-modes-grid">
+                <div class="app-mode-card active">
+                  <div class="mode-icon-circle">🌀</div>
+                  <h6>Alívio Cervical</h6>
+                  <span style="font-size: 0.7rem; color: #888;">Descompressão</span>
+                </div>
+                <div class="app-mode-card">
+                  <div class="mode-icon-circle">💆</div>
+                  <h6>Tensão Muscular</h6>
+                  <span style="font-size: 0.7rem; color: #888;">Liberação Miofascial</span>
+                </div>
+                <div class="app-mode-card">
+                  <div class="mode-icon-circle">〰️</div>
+                  <h6>Pulso Suave</h6>
+                  <span style="font-size: 0.7rem; color: #888;">Circulação Linfática</span>
+                </div>
+                <div class="app-mode-card">
+                  <div class="mode-icon-circle">🌊</div>
+                  <h6>Ondas Theta</h6>
+                  <span style="font-size: 0.7rem; color: #888;">Relaxamento Rápido</span>
+                </div>
+              </div>
+
+              <!-- Termoterapia -->
+              <div class="control-card">
+                <div class="control-title-row">
+                  <h5>Termoterapia Suave</h5>
+                  <span style="font-weight: 800; color: var(--navy);" id="tempValText">38.5°C</span>
+                </div>
+                <input type="range" class="custom-range-slider" min="35" max="42" step="0.5" value="38.5" id="tempSlider">
+                <div class="slider-labels">
+                  <span>35°C (Neutro)</span>
+                  <span>38.5°C (Ideal)</span>
+                  <span>42°C (Intenso)</span>
+                </div>
+              </div>
+
+              <!-- Timer da Sessão -->
+              <div class="control-card" style="display: flex; align-items: center; justify-content: space-between;">
+                <div>
+                  <h5 style="font-size: 0.9rem; color: var(--navy);">Duração da Sessão</h5>
+                  <span style="font-size: 0.75rem; color: #888;">Desliga automaticamente</span>
+                </div>
+                <select style="padding: 8px 12px; border-radius: 8px; border: 1px solid var(--straw); font-weight: 700; color: var(--navy);">
+                  <option>15 minutos</option>
+                  <option selected>30 minutos</option>
+                  <option>45 minutos</option>
+                </select>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Bottom Tab Navigation Bar -->
+          <nav class="app-bottom-nav">
+            <button type="button" class="nav-tab-btn active" data-screen="screenDashboard">
+              <span class="nav-tab-icon">📊</span>
+              <span>Dashboard</span>
+            </button>
+            <button type="button" class="nav-tab-btn" data-screen="screenSnore">
+              <span class="nav-tab-icon">💨</span>
+              <span>Anti-Ronco</span>
+            </button>
+            <button type="button" class="nav-tab-btn" data-screen="screenAudio">
+              <span class="nav-tab-icon">🎵</span>
+              <span>SoundBeam</span>
+            </button>
+            <button type="button" class="nav-tab-btn" data-screen="screenMassage">
+              <span class="nav-tab-icon">💆</span>
+              <span>Massagem</span>
+            </button>
+          </nav>
+        </div>
+
+      </div>
+
+    </main>
+
+    <!-- Right Side Figma Dev Mode / Inspector Panel -->
+    <aside class="figma-inspect-panel">
+      <div class="inspect-header">
+        <h4>Dev Mode / Tokens</h4>
+        <p>Especificações prontas para importar no Figma ou no código do app</p>
+      </div>
+
+      <!-- Colors Tokens -->
+      <div class="inspect-section">
+        <h5>Color Styles (Hex & CSS)</h5>
+        <div class="token-chip-grid">
+          <div class="token-chip">
+            <div class="token-color-circle" style="background: #FFFFFF;"></div>
+            <span>#FFFFFF (White)</span>
+          </div>
+          <div class="token-chip">
+            <div class="token-color-circle" style="background: #E8D9B5;"></div>
+            <span>#E8D9B5 (Straw)</span>
+          </div>
+          <div class="token-chip">
+            <div class="token-color-circle" style="background: #0A1A3A;"></div>
+            <span>#0A1A3A (Navy)</span>
+          </div>
+          <div class="token-chip">
+            <div class="token-color-circle" style="background: #38BDF8;"></div>
+            <span>#38BDF8 (Cyan)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Typography -->
+      <div class="inspect-section">
+        <h5>Typography Hierarchy</h5>
+        <div style="font-size: 0.8rem; display: flex; flex-direction: column; gap: 8px;">
+          <div><strong>Display (Titles):</strong> Outfit Bold / ExtraBold</div>
+          <div><strong>Body (Text):</strong> Plus Jakarta Sans Regular / Medium</div>
+          <div><strong>Score Large:</strong> 48px / Line-Height 1.1</div>
+          <div><strong>Screen Title:</strong> 20px / Semibold</div>
+          <div><strong>Card Title:</strong> 16px / Bold</div>
+        </div>
+      </div>
+
+      <!-- Auto-Layout Specs -->
+      <div class="inspect-section">
+        <h5>Figma Auto-Layout Rules</h5>
+        <div class="code-snippet-box">
+Frame: 393 x 852 px (iPhone 15/16)
+Padding X: 20px
+Padding Top: 54px (Safe Area)
+Padding Bottom: 34px
+Card Corner Radius: 20px - 28px
+Pill Buttons Radius: 999px
+Component Gap: 12px - 16px
+Shadow: 0 15px 35px rgba(10,26,58,0.18)
+        </div>
+      </div>
+
+      <!-- Flutter / React Native Quick Snippet -->
+      <div class="inspect-section">
+        <h5>Flutter / React Native Tokens</h5>
+        <div class="code-snippet-box">
+const Color primaryNavy = Color(0xFF0A1A3A);
+const Color accentStraw = Color(0xFFE8D9B5);
+const Color bgPureWhite = Color(0xFFFFFFFF);
+const Color techCyan = Color(0xFF38BDF8);
+        </div>
+      </div>
+
+    </aside>
+
+  </div>
+
+  <!-- Interactive Simulator Script -->
+  <script>
+    // Tab switching inside mobile frame
+    const tabBtns = document.querySelectorAll('.nav-tab-btn');
+    const screens = document.querySelectorAll('.app-screen');
+
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        tabBtns.forEach(b => b.classList.remove('active'));
+        screens.forEach(s => s.classList.remove('active'));
+
+        btn.classList.add('active');
+        const targetScreenId = btn.getAttribute('data-screen');
+        const targetScreen = document.getElementById(targetScreenId);
+        if (targetScreen) targetScreen.classList.add('active');
+      });
+    });
+
+    // Airbag slider interaction
+    const airbagSlider = document.getElementById('airbagSlider');
+    const airbagValText = document.getElementById('airbagValText');
+    if (airbagSlider && airbagValText) {
+      airbagSlider.addEventListener('input', (e) => {
+        airbagValText.textContent = `+${e.target.value} mm`;
+      });
+    }
+
+    // Temperature slider interaction
+    const tempSlider = document.getElementById('tempSlider');
+    const tempValText = document.getElementById('tempValText');
+    if (tempSlider && tempValText) {
+      tempSlider.addEventListener('input', (e) => {
+        tempValText.textContent = `${e.target.value}°C`;
+      });
+    }
+
+    // Snore simulation inside app
+    const btnAppSimulateSnore = document.getElementById('btnAppSimulateSnore');
+    const appSnoreStatus = document.getElementById('appSnoreStatus');
+    const appDbNumber = document.getElementById('appDbNumber');
+
+    if (btnAppSimulateSnore) {
+      btnAppSimulateSnore.addEventListener('click', () => {
+        appSnoreStatus.textContent = '● RONCO DETECTADO (68 dB)';
+        appSnoreStatus.style.color = '#EF4444';
+        appDbNumber.textContent = '68';
+        appDbNumber.style.color = '#EF4444';
+
+        setTimeout(() => {
+          appSnoreStatus.textContent = '● INFLANDO BOLSA (+8mm)';
+          appSnoreStatus.style.color = '#F59E0B';
+          if (airbagSlider) airbagSlider.value = 8;
+          if (airbagValText) airbagValText.textContent = '+8 mm';
+        }, 1800);
+
+        setTimeout(() => {
+          appSnoreStatus.textContent = '● VIAS LIVRES • SILÊNCIO (14 dB)';
+          appSnoreStatus.style.color = '#10B981';
+          appDbNumber.textContent = '14';
+          appDbNumber.style.color = '#10B981';
+        }, 3600);
+      });
+    }
+
+    // Massage modes click
+    const modeCards = document.querySelectorAll('.app-mode-card');
+    modeCards.forEach(card => {
+      card.addEventListener('click', () => {
+        modeCards.forEach(c => c.classList.remove('active'));
+        card.classList.add('active');
+      });
+    });
+
+    // Audio playlist click
+    const trackItems = document.querySelectorAll('.track-item');
+    const currentTrackTitle = document.getElementById('currentTrackTitle');
+    trackItems.forEach(item => {
+      item.addEventListener('click', () => {
+        trackItems.forEach(t => t.classList.remove('active'));
+        item.classList.add('active');
+        if (currentTrackTitle) currentTrackTitle.textContent = item.getAttribute('data-title');
+      });
+    });
+  </script>
+</body>
+</html>

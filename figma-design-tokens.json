@@ -1,0 +1,66 @@
+{
+  "name": "SmartPillow Mobile App - Figma Design System Tokens",
+  "version": "1.0.0",
+  "author": "SmartPillow UX Team",
+  "palette": {
+    "white": {
+      "pure": { "value": "#FFFFFF", "type": "color", "description": "Fundo limpo e base dos cards" },
+      "soft": { "value": "#FBFBF9", "type": "color", "description": "Superfície suave de fundo" }
+    },
+    "straw": {
+      "base": { "value": "#E8D9B5", "type": "color", "description": "Cor de aconchego, botões secundários, seletores ativos e destaques orgânicos" },
+      "light": { "value": "#F7F3EA", "type": "color", "description": "Cards de apoio e backgrounds sutis" },
+      "dark": { "value": "#C9B283", "type": "color", "description": "Bordas em foco e ícones marcantes" }
+    },
+    "navy": {
+      "deep": { "value": "#0A1A3A", "type": "color", "description": "Profundidade noturna, cards biométricos principais e contrastes fortes" },
+      "dark": { "value": "#040C1D", "type": "color", "description": "Fundo escuro noturno e sombras profundas" },
+      "surface": { "value": "#0F2349", "type": "color", "description": "Superfícies de cards tecnológicos" }
+    },
+    "tech": {
+      "cyan": { "value": "#38BDF8", "type": "color", "description": "Acentos de biometria, ondas sonoras e leds neurais" },
+      "emerald": { "value": "#10B981", "type": "color", "description": "Status normal, silêncio e saúde respiratória" },
+      "warning": { "value": "#F59E0B", "type": "color", "description": "Alerta de ronco leve" },
+      "alert": { "value": "#EF4444", "type": "color", "description": "Detecção de apneia / ronco alto" }
+    }
+  },
+  "typography": {
+    "fontFamily": {
+      "display": { "value": "Outfit, sans-serif" },
+      "body": { "value": "Plus Jakarta Sans, sans-serif" }
+    },
+    "fontSize": {
+      "scoreLarge": { "value": "48px", "lineHeight": "1.1", "fontWeight": "800" },
+      "titleScreen": { "value": "20px", "lineHeight": "1.2", "fontWeight": "700" },
+      "cardTitle": { "value": "16px", "lineHeight": "1.3", "fontWeight": "700" },
+      "body": { "value": "14px", "lineHeight": "1.5", "fontWeight": "400" },
+      "caption": { "value": "12px", "lineHeight": "1.4", "fontWeight": "500" },
+      "badge": { "value": "10px", "lineHeight": "1.2", "fontWeight": "700" }
+    }
+  },
+  "spacing": {
+    "xs": { "value": "4px" },
+    "sm": { "value": "8px" },
+    "md": { "value": "16px" },
+    "lg": { "value": "24px" },
+    "xl": { "value": "32px" }
+  },
+  "borderRadius": {
+    "sm": { "value": "8px" },
+    "md": { "value": "16px" },
+    "lg": { "value": "24px" },
+    "pill": { "value": "9999px" }
+  },
+  "shadows": {
+    "cardSoft": { "value": "0px 8px 24px rgba(10, 26, 58, 0.06)" },
+    "cardTech": { "value": "0px 12px 30px rgba(10, 26, 58, 0.25)" },
+    "glowCyan": { "value": "0px 0px 20px rgba(56, 189, 248, 0.35)" }
+  },
+  "figmaFrameSpecs": {
+    "device": "Apple iPhone 15 Pro / 16",
+    "width": 393,
+    "height": 852,
+    "safeAreaTop": 54,
+    "safeAreaBottom": 34
+  }
+}
