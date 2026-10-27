@@ -556,6 +556,18 @@ function initCookieConsent() {
 
   function saveConsent(preferences) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(preferences));
+
+    // Atualiza o Consent Mode do Google Ads conforme a escolha do usuário
+    if (typeof gtag === 'function') {
+      const mkt = preferences.marketing ? 'granted' : 'denied';
+      gtag('consent', 'update', {
+        ad_storage: mkt,
+        ad_user_data: mkt,
+        ad_personalization: mkt,
+        analytics_storage: preferences.analytics ? 'granted' : 'denied'
+      });
+    }
+
     if (cookieBanner) cookieBanner.classList.remove('visible');
     if (cookieModal) cookieModal.classList.remove('open');
     document.body.style.overflow = '';

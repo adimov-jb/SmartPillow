@@ -8,6 +8,28 @@
   <title>SmartPillow | O Futuro do Sono Restaurador com Tecnologia Anti-Ronco</title>
   <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
 
+  <!-- Google tag (gtag.js) — Google Ads, com Consent Mode v2 (LGPD) -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    (function () {
+      // Tudo negado por padrão; restaura a escolha já salva no banner de cookies
+      var prefs = {};
+      try { prefs = JSON.parse(localStorage.getItem('smartpillow_cookie_preferences')) || {}; } catch (e) {}
+      var mkt = prefs.marketing ? 'granted' : 'denied';
+      gtag('consent', 'default', {
+        ad_storage: mkt,
+        ad_user_data: mkt,
+        ad_personalization: mkt,
+        analytics_storage: prefs.analytics ? 'granted' : 'denied',
+        wait_for_update: 500
+      });
+    })();
+    gtag('js', new Date());
+    gtag('config', 'AW-18539323021');
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18539323021"></script>
+
   <!-- Google Fonts Preconnect -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
