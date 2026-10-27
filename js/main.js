@@ -396,6 +396,18 @@ function initCheckoutModal() {
       submitBtn.innerHTML = 'Processando com Criptografia Segura...';
       submitBtn.disabled = true;
 
+      // Conversão do Google Ads: Reserva Pré-venda (valor à vista de cada modelo)
+      const modelPrices = { lite: 779, pro: 1098, ultra: 1599 };
+      const model = modalModelSelect ? modalModelSelect.value : 'ultra';
+      if (typeof gtag === 'function') {
+        gtag('event', 'conversion', {
+          send_to: 'AW-18539323021/jTDXCLHR6KodEI29nohF',
+          value: modelPrices[model] || modelPrices.ultra,
+          currency: 'BRL',
+          transaction_id: 'SP-' + Date.now() + '-' + Math.random().toString(36).slice(2, 8)
+        });
+      }
+
       setTimeout(() => {
         alert('🎉 Parabéns! Seu pedido de pré-venda do SmartPillow foi reservado com sucesso com 35% OFF e 100 Noites de Teste Sem Risco! Em instantes enviaremos os detalhes de rastreamento e confirmação no seu e-mail.');
         closeModal();
