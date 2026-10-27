@@ -2069,6 +2069,35 @@ button {
   line-height: 1.6;
 }
 
+.footer-social {
+  display: flex;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.footer-social a {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--straw);
+  border: 1px solid rgba(232, 217, 181, 0.35);
+  transition: var(--transition-fast);
+}
+
+.footer-social a:hover {
+  background: var(--straw);
+  color: var(--navy-dark);
+  transform: translateY(-2px);
+}
+
+.footer-social svg {
+  width: 18px;
+  height: 18px;
+}
+
 .footer-col h5 {
   font-family: var(--font-display);
   font-size: 1.05rem;
