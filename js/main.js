@@ -357,6 +357,9 @@ function initSleepQuiz() {
 /* ===================================================================
    9. MODAL DE PRÉ-VENDA / CHECKOUT RÁPIDO
    =================================================================== */
+// E-mail que recebe as reservas de pré-venda
+const RESERVATION_EMAIL = 'smartpillow10@gmail.com';
+
 function initCheckoutModal() {
   const modalOverlay = document.getElementById('checkoutModalOverlay');
   const openBtns = document.querySelectorAll('[data-open-checkout]');
@@ -396,25 +399,53 @@ function initCheckoutModal() {
       submitBtn.innerHTML = 'Processando com Criptografia Segura...';
       submitBtn.disabled = true;
 
-      // Conversão do Google Ads: Reserva Pré-venda (valor à vista de cada modelo)
       const modelPrices = { lite: 779, pro: 1098, ultra: 1599 };
       const model = modalModelSelect ? modalModelSelect.value : 'ultra';
-      if (typeof gtag === 'function') {
-        gtag('event', 'conversion', {
-          send_to: 'AW-18539323021/jTDXCLHR6KodEI29nohF',
-          value: modelPrices[model] || modelPrices.ultra,
-          currency: 'BRL',
-          transaction_id: 'SP-' + Date.now() + '-' + Math.random().toString(36).slice(2, 8)
-        });
-      }
+      const reservationId = 'SP-' + Date.now() + '-' + Math.random().toString(36).slice(2, 8);
+      const field = (id) => (document.getElementById(id) || {}).value || '';
 
-      setTimeout(() => {
-        alert('🎉 Parabéns! Seu pedido de pré-venda do SmartPillow foi reservado com sucesso com 35% OFF e 100 Noites de Teste Sem Risco! Em instantes enviaremos os detalhes de rastreamento e confirmação no seu e-mail.');
-        closeModal();
-        submitBtn.innerHTML = 'Concluir Reserva com 35% OFF';
-        submitBtn.disabled = false;
-        checkoutForm.reset();
-      }, 1500);
+      // Envia a reserva por e-mail (FormSubmit) para a equipe SmartPillow
+      fetch('https://formsubmit.co/ajax/' + RESERVATION_EMAIL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          _subject: 'Nova reserva SmartPillow ' + model.toUpperCase() + ' — ' + field('clientName'),
+          _template: 'table',
+          _replyto: field('clientEmail'),
+          'Reserva': reservationId,
+          'Modelo': modalModelSelect ? modalModelSelect.options[modalModelSelect.selectedIndex].text : model,
+          'Valor à vista': 'R$ ' + (modelPrices[model] || modelPrices.ultra).toLocaleString('pt-BR') + ',00',
+          'Nome': field('clientName'),
+          'E-mail': field('clientEmail'),
+          'WhatsApp / Telefone': field('clientPhone'),
+          'CEP': field('clientCep')
+        })
+      })
+        .then(res => res.json().then(data => {
+          if (!res.ok || String(data.success) !== 'true') throw new Error(data.message || 'Falha no envio');
+        }))
+        .then(() => {
+          // Conversão do Google Ads: só conta reservas que chegaram por e-mail
+          if (typeof gtag === 'function') {
+            gtag('event', 'conversion', {
+              send_to: 'AW-18539323021/jTDXCLHR6KodEI29nohF',
+              value: modelPrices[model] || modelPrices.ultra,
+              currency: 'BRL',
+              transaction_id: reservationId
+            });
+          }
+          alert('🎉 Parabéns! Seu pedido de pré-venda do SmartPillow foi reservado com sucesso com 35% OFF e 100 Noites de Teste Sem Risco! Em breve entraremos em contato pelo e-mail e WhatsApp informados.');
+          closeModal();
+          checkoutForm.reset();
+        })
+        .catch(err => {
+          console.warn('Erro ao enviar reserva:', err);
+          alert('Não foi possível concluir sua reserva agora. Verifique sua conexão e tente novamente em instantes.');
+        })
+        .finally(() => {
+          submitBtn.innerHTML = 'Concluir Reserva com 35% OFF';
+          submitBtn.disabled = false;
+        });
     });
   }
 }
